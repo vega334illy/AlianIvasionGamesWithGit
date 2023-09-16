@@ -1,16 +1,18 @@
 import sys
 
 import pygame
+from settings import Settings
 
 class AlienInvasion:
     """ Класс для управления ресурсами и поведением игры."""
     def __init__(self):
         """ Инициалищирует игру и созает русурсы."""
         pygame.init()
-        # Цвет фона
-        self.bg_color = (230,230,230)
+        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height))
+
         pygame.display.set_caption("Alien Invasion")
     
     def run_game(self):
@@ -21,7 +23,7 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     sys.exit()
             # При каждом цикле перерисовываем экран
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
             # Отображение последнего прорисованного экрана
 
             pygame.display.flip()
