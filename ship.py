@@ -12,6 +12,8 @@ class Ship():
         self.rect.midbottom = self.screen_rect.midbottom
         self.moving_right = False
         self.moving_left = False
+        self.moving_up = False
+        self.moving_down = False
 
     def update(self):
         """ Update ship position."""
@@ -19,6 +21,10 @@ class Ship():
             self.rect.x += 1
         elif self.moving_left:
             self.rect.x -= 1
+        elif self.moving_up:
+            self.rect.y -= 1
+        elif self.moving_down:
+            self.rect.y += 1
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
