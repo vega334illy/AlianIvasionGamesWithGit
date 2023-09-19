@@ -1,5 +1,4 @@
-    My practice python3 on AlianIvasionGames with "git" and "git hub" 
-control version.
+My practice python3 on AlianIvasionGames with "git" and "git hub" control version.
 
 Python Crash Course Book, 2nd Edition.
  
