@@ -23,9 +23,9 @@ class Ship():
     def update(self):
         """ Update ship position."""
         # Update x, not rect
-        if self.moving_right:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
-        elif self.moving_left:
+        elif self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
         # Update rect on base self.x
         self.rect.x = self.x
