@@ -3,6 +3,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 class AlienInvasion:
     """ Класс для управления ресурсами и поведением игры."""
@@ -11,12 +12,14 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
+
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
 
     
     def run_game(self):
@@ -24,6 +27,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
 
     def _check_events(self):
@@ -43,6 +47,8 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
         elif event.key == pygame.K_q:
             sys.exit()
 
@@ -51,6 +57,10 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+    def _fire_bullet(self):
+        """ Create bullet and add to sprite Group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _update_screen(self):
         """ Update screen."""
@@ -58,6 +68,8 @@ class AlienInvasion:
         self.screen.fill(self.settings.bg_color)
         # Get spaceship.
         self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         # Отображение последнего прорисованного экрана.
 
         pygame.display.flip()
