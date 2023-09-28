@@ -12,7 +12,6 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
@@ -20,19 +19,13 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
-
     
     def run_game(self):
         """ Запуск основного цикла игры."""
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-            # Delete bullets out of range.
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <=0:
-                    self.bullets.remove(bullet)
-            # print(len(self.bullets))
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -68,6 +61,14 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullet_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        self.bullets.update()
+        # Delete bullets out of range.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <=0:
+                self.bullets.remove(bullet)
+        # print(len(self.bullets))
 
     def _update_screen(self):
         """ Update screen."""
