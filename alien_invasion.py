@@ -32,7 +32,7 @@ class AlienInvasion:
             for bullet in self.bullets.copy():
                 if bullet.rect.bottom <=0:
                     self.bullets.remove(bullet)
-            print(len(self.bullets))
+            # print(len(self.bullets))
             self._update_screen()
 
     def _check_events(self):
@@ -62,6 +62,7 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+    
     def _fire_bullet(self):
         """ Create bullet and add to sprite Group."""
         if len(self.bullets) < self.settings.bullet_allowed:
