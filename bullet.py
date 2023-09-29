@@ -15,17 +15,17 @@ class Bullet(Sprite):
 
         # 
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
-        self.rect.midtop = ai_game.ship.rect.midtop
+        self.rect.midright = ai_game.ship.rect.midright
 
         #
-        self.y = float(self.rect.y)
+        self.x = float(self.rect.x)
 
     def update(self):
         """ Move bullet up the screen."""
         # Update the decimall position of the bullet.
-        self.y -= self.settings.bullet_speed
+        self.x += self.settings.bullet_speed
         # Update the rect position.
-        self.rect.y = self.y
+        self.rect.x = self.x
 
     def draw_bullet(self):
         """ Draw the bullet to the screen."""
