@@ -66,7 +66,7 @@ class AlienInvasion:
         self.bullets.update()
         # Delete bullets out of range.
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <=0:
+            if bullet.rect.right >= self.screen.get_rect().right:
                 self.bullets.remove(bullet)
         # print(len(self.bullets))
 
