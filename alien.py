@@ -1,6 +1,6 @@
 import pygame
 
-from pygame.sprite import sprite
+from pygame.sprite import Sprite
 
 class Alien(Sprite):
     """ Class of alien."""
