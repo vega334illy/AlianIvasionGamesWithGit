@@ -67,6 +67,7 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullet_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+        # 
 
     def _update_bullets(self):
         self.bullets.update()
@@ -75,6 +76,9 @@ class AlienInvasion:
             if bullet.rect.bottom <=0:
                 self.bullets.remove(bullet)
         # print(len(self.bullets))
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
 
     def _update_aliens(self):
         """ Update the position of all aliens in the fleet."""
