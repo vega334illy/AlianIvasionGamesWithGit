@@ -86,13 +86,14 @@ class AlienInvasion:
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
-        
-
 
     def _update_aliens(self):
         """ Update the position of all aliens in the fleet."""
         self._check_fleet_edges()
         self.aliens.update()
+        # Check collisions "alien - ship."
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print ("Ship Hit!")
 
     def _create_fleet(self):
         """ Create aliens fleet."""
