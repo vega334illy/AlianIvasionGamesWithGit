@@ -75,10 +75,19 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <=0:
                 self.bullets.remove(bullet)
-        # print(len(self.bullets))
+        self._check_bullet_alien_collision()
+
+    def _check_bullet_alien_collision(self):
+        """ Handling collisions between projectiles and alien."""
+        # Removing aliens and projectiles involved in collisions.
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True, True
         )
+        if not self.aliens:
+            self.bullets.empty()
+            self._create_fleet()
+        
+
 
     def _update_aliens(self):
         """ Update the position of all aliens in the fleet."""
@@ -96,7 +105,7 @@ class AlienInvasion:
         ship_height = self.ship.rect.height
         available_space_y = (self.settings.screen_height - 
             (3 * alien_height) - ship_height)
-        number_rows = available_space_y // (2 * alien_height)
+        number_rows = available_space_y // (2 * alien_height) - 1
 
         # Create first row of alien fleet
         for row_number in range(number_rows):
